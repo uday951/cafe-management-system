@@ -86,13 +86,10 @@ httpServer.listen(PORT, async () => {
   await connectDB();
   console.log(`🚀 Server running on port ${PORT}`);
 
-  // Self-ping to prevent Render free tier sleep
+  // Self-ping every 15s to prevent Render free tier sleep
   setInterval(async () => {
     try {
       await fetch(`http://localhost:${PORT}/api/health`);
-      console.log('🏓 Self-ping OK');
-    } catch (err) {
-      console.warn('⚠️ Self-ping failed:', err.message);
-    }
-  }, 5000);
+    } catch { /* silent */ }
+  }, 15000);
 });
