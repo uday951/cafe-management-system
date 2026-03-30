@@ -1,6 +1,8 @@
 import Table from '../models/Table.js';
 import QRCode from 'qrcode';
 
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://cafe-management-frontend-27wf.onrender.com';
+
 export const getTables = async (req, res) => {
   try {
     const { businessId } = req.query;
@@ -16,8 +18,6 @@ export const createTable = async (req, res) => {
   try {
     const { businessId } = req.body;
     if (!businessId) return res.status(400).json({ message: 'businessId required' });
-
-    const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
     const last = await Table.findOne({ businessId }).sort({ tableNumber: -1 });
     const tableNumber = last ? last.tableNumber + 1 : 1;
@@ -47,16 +47,16 @@ export const regenerateQRCodes = async (req, res) => {
     const { businessId } = req.body;
     if (!businessId) return res.status(400).json({ message: 'businessId required' });
 
-    const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+    const FRONTEND_URL_USED = process.env.FRONTEND_URL || FRONTEND_URL;
     const tables = await Table.find({ businessId });
 
     for (const table of tables) {
-      const qrUrl = `${FRONTEND_URL}/${businessId}/menu?table=${table.tableNumber}`;
+      const qrUrl = `${FRONTEND_URL_USED}/${businessId}/menu?table=${table.tableNumber}`;
       table.qrCode = await QRCode.toDataURL(qrUrl);
       await table.save();
     }
 
-    res.json({ message: `Regenerated ${tables.length} QR codes`, frontendUrl: FRONTEND_URL });
+    res.json({ message: `Regenerated ${tables.length} QR codes`, frontendUrl: FRONTEND_URL_USED });
   } catch (err) {
     res.status(500).json({ message: 'Server Error' });
   }
