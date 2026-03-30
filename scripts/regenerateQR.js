@@ -3,7 +3,7 @@ import QRCode from 'qrcode';
 
 const MONGODB_URI = 'mongodb+srv://udaydd6062_db_user:uday1234@cluster0.4fygtxp.mongodb.net/urbanflow?retryWrites=true&w=majority&appName=Cluster0';
 const BUSINESS_ID = '69ca84ef170e0a9d7c3d864b';
-const FRONTEND_URL = 'https://cafe-management-frontend.onrender.com';
+const FRONTEND_URL = 'https://cafe-management-frontend-27wf.onrender.com';
 
 await mongoose.connect(MONGODB_URI);
 
