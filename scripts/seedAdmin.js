@@ -14,10 +14,10 @@ const seedAdmin = async () => {
     const { default: Business } = await import('../src/models/Business.js');
 
     // Admin credentials
-    const ADMIN_EMAIL = 'admin@urbanflow.com';
+    const ADMIN_EMAIL = 'admin@ignivanceflow.com';
     const ADMIN_PASSWORD = 'Admin@1234';
-    const ADMIN_NAME = 'UrbanFlow Admin';
-    const BUSINESS_NAME = 'UrbanFlow Cafe';
+    const ADMIN_NAME = 'Ignivance Flow Admin';
+    const BUSINESS_NAME = 'Ignivance Flow';
 
     // Check if admin already exists
     const existingUser = await User.findOne({ email: ADMIN_EMAIL });
