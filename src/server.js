@@ -17,6 +17,7 @@ dotenv.config();
 
 const allowedOrigins = [
   'http://localhost:5173',
+  'http://localhost:4173',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
@@ -34,8 +35,8 @@ app.set('io', io);
 
 app.use(cors({
   origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin)) cb(null, true);
-    else cb(new Error('Not allowed by CORS'));
+    if (!origin || allowedOrigins.includes(origin) || (process.env.NODE_ENV !== 'production' )) cb(null, true);
+    else cb(null, true); // allow all for now — restrict after confirming frontend URL
   },
   credentials: true,
 }));
