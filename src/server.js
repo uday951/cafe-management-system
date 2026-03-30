@@ -89,9 +89,11 @@ httpServer.listen(PORT, async () => {
   console.log(`🚀 Server running on port ${PORT}`);
 
   // Self-ping every 15s to prevent Render free tier sleep
+  const FRONTEND = process.env.FRONTEND_URL || 'https://cafe-management-frontend-27wf.onrender.com';
   setInterval(async () => {
     try {
       await fetch(`http://localhost:${PORT}/api/health`);
+      await fetch(FRONTEND);
     } catch { /* silent */ }
   }, 15000);
 });
