@@ -1,7 +1,7 @@
 import Table from '../models/Table.js';
 import QRCode from 'qrcode';
 
-const FRONTEND_URL = process.env.FRONTEND_URL || 'https://cafe-management-frontend-27wf.onrender.com';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://cafemanage.ignivance.in';
 
 export const getTables = async (req, res) => {
   try {
